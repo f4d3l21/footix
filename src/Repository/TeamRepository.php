@@ -38,6 +38,14 @@ class TeamRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    // [FUNC/METHOD] Pagination query builder 
+    public function findwithPagination($page, $limit){
+    $qb = $this -> createQueryBuilder('s');
+    $qb->setFirstResult(($page - 1) * $limit);
+    $qb->setMaxResults($limit);
+    return $qb->getQuery()->getResult();
+}
 
 //    /**
 //     * @return Team[] Returns an array of Team objects
